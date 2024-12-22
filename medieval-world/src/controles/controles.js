@@ -8,7 +8,6 @@ export default class Controles {
         this.controles = new PointerLockControls(this.camera, document.body);
         this.movimento = { frente: false, tras: false, esquerda: false, direita: false };
         this.velocidadeMovimento = 0.2;
-
         this.#configurarEventos();
     }
 
@@ -61,8 +60,7 @@ export default class Controles {
         const posicaoTemporaria = new TRES.Vector3();
 
         vetorFrente.set(0, 0, Number(this.movimento.tras) - Number(this.movimento.frente));
-        vetorDireita.set(Number(this.movimento.direita) - Number(this.movimento.esquerda), 0, 0);
-
+        vetorDireita.set(Number(this.movimento.esquerda) - Number(this.movimento.direita), 0, 0);
         direcao.subVectors(vetorFrente, vetorDireita).normalize();
         const deslocamento = direcao.clone().applyEuler(this.camera.rotation).multiplyScalar(this.velocidadeMovimento);
         posicaoTemporaria.copy(this.camera.position).add(deslocamento);

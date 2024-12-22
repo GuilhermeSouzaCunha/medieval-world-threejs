@@ -17,11 +17,12 @@ export default class CarregadorRecursos {
         });
     }
 
-    carregarModelo(caminho, objetos) {
+    carregarModelo(caminho, objetos, posicao = { x: 0, y: 0, z: 0 }, escala = { x: 1, y: 1, z: 1 }) {
         this.carregadorGLTF.load(caminho, (gltf) => {
             const modelo = gltf.scene;
             modelo.castShadow = true;
-            modelo.position.set(0, 0, -5);
+            modelo.position.set(posicao.x, posicao.y, posicao.z);  
+            modelo.scale.set(escala.x, escala.y, escala.z);       
             this.cena.cena.add(modelo);
             objetos.push(modelo);
         });
